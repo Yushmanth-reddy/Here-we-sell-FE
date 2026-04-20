@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { Listing } from '@/types/listing';
+import type { Listing, CreateListingInput } from '@/types/listing';
 import type { ApiResponse, PaginatedResponse } from '@/types/api';
 
 export interface ListingsQueryParams {
@@ -21,7 +21,6 @@ export interface ListingsQueryParams {
 export async function getListings(
   params: ListingsQueryParams = {}
 ): Promise<PaginatedResponse<Listing>> {
-  // Strip out undefined params so they don't appear as ?key=undefined
   const cleanParams = Object.fromEntries(
     Object.entries(params).filter(([, v]) => v !== undefined && v !== '')
   );
@@ -36,4 +35,39 @@ export async function getListingById(
   id: string
 ): Promise<ApiResponse<Listing>> {
   return apiClient.get(`/listings/${id}`);
+}
+
+/**
+ * Create a new listing.
+ */
+export async function createListing(
+  data: CreateListingInput
+): Promise<ApiResponse<Listing>> {
+  return apiClient.post('/listings', data);
+}
+
+/**
+ * Update an existing listing (owner only).
+ */
+export async function updateListing(
+  id: string,
+  data: Partial<CreateListingInput>
+): Promise<ApiResponse<Listing>> {
+  return apiClient.patch(`/listings/${id}`, data);
+}
+
+/**
+ * Soft delete a listing (owner or admin).
+ */
+export async function deleteListing(
+  id: string
+): Promise<ApiResponse<null>> {
+  return apiClient.delete(`/listings/${id}`);
+}
+
+/**
+ * Get all listings created by the logged-in user.
+ */
+export async function getMyListings(): Promise<ApiResponse<Listing[]>> {
+  return apiClient.get('/users/me/listings');
 }

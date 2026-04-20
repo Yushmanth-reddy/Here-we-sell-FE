@@ -8,6 +8,9 @@ import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
 import { OAuthCallbackPage } from '@/pages/OAuthCallbackPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { ListingDetailPage } from '@/pages/ListingDetailPage';
+import { FavoritesPage } from '@/pages/FavoritesPage';
+import { SellPage } from '@/pages/SellPage';
 
 // Placeholder for pages we'll build in later days
 const Placeholder = ({ name }: { name: string }) => (
@@ -27,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/listings/:id',
-        element: <Placeholder name="Listing Detail Page" />,
+        element: <ListingDetailPage />,
       },
       {
         path: '/login',
@@ -44,7 +47,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '/sell',
-            element: <Placeholder name="Create/Edit Listing Form" />,
+            element: <SellPage />,
           },
           {
             path: '/dashboard',
@@ -52,7 +55,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/favorites',
-            element: <Placeholder name="My Favorited Listings" />,
+            element: <FavoritesPage />,
           },
           {
             path: '/profile',
