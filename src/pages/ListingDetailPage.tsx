@@ -22,6 +22,7 @@ import { useToggleFavorite } from '@/lib/hooks/useFavorites';
 import { useAuthStore } from '@/lib/store/authStore';
 import { formatPrice } from '@/lib/utils/formatPrice';
 import { CONDITIONS } from '@/lib/utils/constants';
+import { getImageUrls } from '@/types/listing';
 import { toast } from 'sonner';
 
 export function ListingDetailPage() {
@@ -134,7 +135,7 @@ export function ListingDetailPage() {
 
       <div className="grid gap-8 lg:grid-cols-2">
         {/* Left — Images */}
-        <ImageCarousel images={listing.image_urls} alt={listing.title} />
+        <ImageCarousel images={getImageUrls(listing)} alt={listing.title} />
 
         {/* Right — Info */}
         <div className="space-y-6">
@@ -214,14 +215,16 @@ export function ListingDetailPage() {
             </h3>
             <div className="flex items-center gap-3">
               <Avatar className="h-10 w-10">
-                <AvatarImage src="" />
+                <AvatarImage src={listing.seller?.avatar_url ?? ''} />
                 <AvatarFallback className="bg-primary/10 text-primary text-sm">
-                  S
+                  {listing.seller?.first_name?.[0] ?? 'S'}
                 </AvatarFallback>
               </Avatar>
               <div>
                 <p className="text-sm font-medium text-foreground">
-                  Campus Seller
+                  {listing.seller
+                    ? `${listing.seller.first_name} ${listing.seller.last_name}`
+                    : 'Campus Seller'}
                 </p>
                 <p className="text-xs text-muted-foreground">IIITM Gwalior</p>
               </div>

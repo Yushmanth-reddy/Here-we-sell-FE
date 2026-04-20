@@ -11,6 +11,8 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ListingDetailPage } from '@/pages/ListingDetailPage';
 import { FavoritesPage } from '@/pages/FavoritesPage';
 import { SellPage } from '@/pages/SellPage';
+import { DashboardPage } from '@/pages/DashboardPage';
+import { ProfilePage } from '@/pages/ProfilePage';
 
 // Placeholder for pages we'll build in later days
 const Placeholder = ({ name }: { name: string }) => (
@@ -51,7 +53,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/dashboard',
-            element: <Placeholder name="User Dashboard (My Listings)" />,
+            element: <DashboardPage />,
           },
           {
             path: '/favorites',
@@ -59,7 +61,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/profile',
-            element: <Placeholder name="Edit Profile" />,
+            element: <ProfilePage />,
           },
 
           // --- ADMIN ONLY ROUTES ---

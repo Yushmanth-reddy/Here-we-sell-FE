@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import type { Listing } from '@/types/listing';
+import { getImageUrls } from '@/types/listing';
 import { formatPrice } from '@/lib/utils/formatPrice';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useToggleFavorite } from '@/lib/hooks/useFavorites';
@@ -39,7 +40,7 @@ export function ListingCard({ listing, index = 0 }: ListingCardProps) {
           {/* Image */}
           <div className="relative aspect-[4/3] overflow-hidden bg-muted">
             <img
-              src={listing.image_urls?.[0] ?? '/placeholder.svg'}
+              src={getImageUrls(listing)[0] ?? '/placeholder.svg'}
               alt={listing.title}
               loading="lazy"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
